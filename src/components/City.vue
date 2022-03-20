@@ -110,8 +110,8 @@ const responsiveListener = (bool) => {
 const rendererInit = () => {
   renderer.value = new THREE.WebGLRenderer({
     canvas: funkeetown.value,
-    antialias: true,
-    precision: 'mediump'
+    antialias: true
+    // precision: 'mediump'
   })
   renderer.value.setSize(width.value, height.value)
   renderer.value.setPixelRatio(Math.min(window.devicePixelRatio, 2))
