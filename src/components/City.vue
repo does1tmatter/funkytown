@@ -139,7 +139,28 @@ const refreshScene = () => {
   sceneInit()
 }
 
+const keyPressListener = (bool) => {
+  if (bool) {
+    window.addEventListener('keypress', (e) => {
+      if (e.code === 'Space') {
+        refreshScene()
+      }
+    })
+  } else {
+    window.removeEventListener('keypress', (e) => {
+      if (e.code === 'Space') {
+        refreshScene()
+      }
+    })
+  }
+}
+
 const rngNum = (max = 17) => Math.round(Math.random() * (max - 1)) + 1
+
+const listeners = (bool) => {
+  responsiveListener(bool)
+  keyPressListener(bool)
+}
 
 onMounted(() => {
   setThemeColor()
@@ -149,11 +170,11 @@ onMounted(() => {
   rendererInit()
   lightFrontInit()
   animate()
-  responsiveListener(true)
+  listeners(true)
 })
 
 onUnmounted(() => {
-  responsiveListener(false)
+  listeners(false)
 })
 </script>
 
