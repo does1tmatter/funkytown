@@ -30,5 +30,6 @@ html {
   text-align: center;
   font-weight: 900;
   font-size: 92px;
+  pointer-events: none;
 }
 </style>
