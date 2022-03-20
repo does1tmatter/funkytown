@@ -1,10 +1,11 @@
 <script setup>
 import * as THREE from 'three'
-import { useWindowSize, useMouse } from '@vueuse/core'
+import { useWindowSize, useMouse, useFps } from '@vueuse/core'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 const { width, height } = useWindowSize()
 const { x, y } = useMouse()
+const fps = useFps()
 
 const funkeetown = ref(null)
 
@@ -167,6 +168,9 @@ onUnmounted(() => {
 
 <template>
   <canvas ref="funkeetown"></canvas>
+  <div class="fps">
+    FPS: {{ fps }}
+  </div>
 </template>
 
 <style scoped>
@@ -174,5 +178,12 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
+}
+.fps {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  opacity: 0.3;
+  font-weight: 100;
 }
 </style>

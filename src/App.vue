@@ -12,6 +12,11 @@ import City from '@/components/City.vue'
 <style>
 @import './assets/base.css';
 
+html {
+  background-color: #171d1c;
+  overflow: hidden;
+}
+
 #app {
   font-weight: normal;
 }
@@ -26,9 +31,4 @@ import City from '@/components/City.vue'
   font-weight: 900;
   font-size: 92px;
 }
-
-body {
-  overflow: hidden;
-}
-
 </style>
