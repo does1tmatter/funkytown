@@ -5,7 +5,14 @@ import City from '@/components/City.vue'
 <template>
   <City />
   <div class="abs">
-    FUNKYTOWN
+    <div>
+      <div>
+        FUNKYTOWN
+      </div>
+      <div class="under">
+        ( press space to refresh )
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,5 +30,13 @@ import City from '@/components/City.vue'
   font-weight: 900;
   font-size: 92px;
   pointer-events: none;
+  text-align: center;
+  }
+
+  .under {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 1;
+    opacity: 0.5;
   }
 </style>
