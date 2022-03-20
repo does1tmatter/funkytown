@@ -21,7 +21,7 @@ const renderer = ref(null)
 
 const setThemeColor = (_color = 0xF02050) => {
   scene.background = new THREE.Color(0x171d1c)
-  scene.fog = new THREE.Fog(_color, 10, 20)
+  scene.fog = new THREE.Fog(_color, 2, 23)
 }
 
 const randomInt = (num = 8) => {
@@ -30,8 +30,8 @@ const randomInt = (num = 8) => {
 }
 
 const cameraInit = () => {
-  camera.position.x = 0 
-  camera.position.y = -0.5
+  camera.position.x = -0.5 
+  camera.position.y = 0
   camera.position.z = 22
   scene.add(camera)
 }
@@ -127,7 +127,7 @@ const animate = () => {
 
 onMounted(() => {
   setThemeColor(0x171D1C)
-  initializeTown(125) 
+  initializeTown() 
   cameraInit()
   sceneInit()
   rendererInit()
