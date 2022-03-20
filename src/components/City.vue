@@ -165,7 +165,7 @@ onUnmounted(() => {
   <div class="refresh">
     <div @click="refreshScene()">
       <svg version="1.1" id="Layer_1" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-	 viewBox="0 0 496.156 496.156" style="enable-background:new 0 0 496.156 496.156; cursor: pointer; pointer-events: none;" xml:space="preserve">
+	 viewBox="0 0 496.156 496.156" style="enable-background:new 0 0 496.156 496.156; cursor: pointer;" xml:space="preserve">
         <path style="fill:#FFFFFF;" d="M428.243,172.149c-10.348,0.023-20.694,0.054-31.042,0.077
           c-23.272-52.177-68.95-89.871-126.649-98.91c-64.287-10.071-125.816,19.788-162.504,72.312
           c-16.296,23.326,22.003,45.165,38.16,22.034c50.317-72.037,157.757-65.527,201.907,4.686c-9.559,0.022-19.118,0.046-28.678,0.068
