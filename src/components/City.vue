@@ -8,6 +8,9 @@ const { x, y } = useMouse()
 const fps = useFps()
 
 const funkeetown = ref(null)
+const themeColor = ref(0x171D1C)
+
+const colorArray = [0xD8FFDD, 0xF02050, 0xFFE734, 0xD9FFF8, 0xFF0037, 0xBB00FF, 0x40FF00, 0xFF0000, 0xF700FF, 0xFF00D4, 0x1900FF, 0x00E5FF, 0x00FFAE, 0xF3FCF0, 0xFF0022, 0x41EAD4, 0xFDFFFC]
 
 const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1)
 const lightFront = new THREE.SpotLight(0xFFFFFF, 20, 10)
@@ -19,9 +22,8 @@ const building = new THREE.Object3D()
 const city = new THREE.Object3D()
 const renderer = ref(null)
 
-const setThemeColor = (_color = 0xF02050) => {
-  scene.background = new THREE.Color(0x171d1c)
-  scene.fog = new THREE.Fog(_color, 2, 23)
+const setThemeColor = () => {
+  themeColor.value = colorArray[rngNum()]
 }
 
 const randomInt = (num = 8) => {
@@ -36,12 +38,12 @@ const cameraInit = () => {
   scene.add(camera)
 }
 
-const initializeTown = (population = 100, _color = 0xF02050) => {
+const initializeTown = (population = 100) => {
   for (let i = 0; i < population; i++) {
     const geometry = new THREE.BoxGeometry()
 
     const material = new THREE.MeshPhysicalMaterial({
-      color: _color,
+      color: themeColor.value,
       roughness: 1,
       metalness: 1,
       clearcoat: 1,
@@ -81,6 +83,7 @@ const lightFrontInit = () => {
 }
 
 const sceneInit = () => {
+  scene.fog = new THREE.Fog('#171D1C', 2, 23)
   scene.add(ambientLight)
   scene.add(city)
   city.add(building)
@@ -110,11 +113,13 @@ const responsiveListener = (bool) => {
 const rendererInit = () => {
   renderer.value = new THREE.WebGLRenderer({
     canvas: funkeetown.value,
-    antialias: true
+    antialias: true,
+    alpha: true
     // precision: 'mediump'
   })
   renderer.value.setSize(width.value, height.value)
   renderer.value.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.value.setClearColor(0x171D1C, 1)
   renderer.value.render(scene, camera)
 }
 
@@ -125,8 +130,10 @@ const animate = () => {
   renderer.value.render(scene, camera)
 }
 
+const rngNum = (max = 17) => Math.round(Math.random() * (max - 1)) + 1
+
 onMounted(() => {
-  setThemeColor(0x171D1C)
+  setThemeColor()
   initializeTown() 
   cameraInit()
   sceneInit()
@@ -160,6 +167,7 @@ canvas {
   left: 10px;
   opacity: 0.3;
   font-weight: 100;
+  font-size: 12px;
   pointer-events: none;
 }
 </style>
