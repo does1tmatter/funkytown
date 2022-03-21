@@ -253,7 +253,7 @@ canvas {
   gap: 30px;
   position: absolute;
   top: 20px;
-  right: 40px;
+  right: 20px;
 }
 .interval {
   display: inline;
