@@ -1,7 +1,7 @@
 <script setup>
 import * as THREE from 'three'
 import { useWindowSize, useMouse, useFps } from '@vueuse/core'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const { width, height } = useWindowSize()
 const { x, y } = useMouse()
@@ -162,6 +162,19 @@ const listeners = (bool) => {
   keyPressListener(bool)
 }
 
+const playing = ref(false)
+let intervalId = null
+
+const play = () => {
+  playing.value = !playing.value
+  if (playing.value) {
+    intervalId = setInterval(refreshScene, 3000)
+  } else {
+    clearInterval(intervalId)
+    intervalId = null
+  }
+}
+
 onMounted(() => {
   setThemeColor()
   initializeTown() 
@@ -183,8 +196,23 @@ onUnmounted(() => {
   <div class="fps">
     FPS: {{ fps }}
   </div>
-  <div class="refresh">
-    <div @click="refreshScene()">
+  <div class="controls">
+    <div class="interval" @click="play()">
+      <svg v-if="!playing" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="33" height="33" viewBox="0 0 163.861 163.861" style="enable-background:new 0 0 163.861 163.861;"
+        xml:space="preserve">
+        <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+          c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" fill="#FFFFFF"/>
+      </svg>
+      <svg v-if="playing" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 47.607 47.607" width="30" style="enable-background:new 0 0 47.607 47.607;" xml:space="preserve">
+        <path d="M17.991,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631C4.729,2.969,7.698,0,11.36,0
+          l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z" fill="#FFFFFF"/>
+        <path d="M42.877,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631
+          C29.616,2.969,32.585,0,36.246,0l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z" fill="#FFFFFF"/>
+      </svg>
+    </div>
+    <div class="refresh" @click="refreshScene()">
       <svg version="1.1" id="Layer_1" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	 viewBox="0 0 496.156 496.156" style="enable-background:new 0 0 496.156 496.156; cursor: pointer;" xml:space="preserve">
         <path style="fill:#FFFFFF;" d="M428.243,172.149c-10.348,0.023-20.694,0.054-31.042,0.077
@@ -218,12 +246,25 @@ canvas {
   font-size: 12px;
   pointer-events: none;
 }
-.refresh {
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 30px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 40px;
 }
-.refresh button {
-  background: transparent;
+.interval {
+  display: inline;
+  cursor: pointer;
+}
+
+.interval, .refresh {
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.interval:hover, .refresh:hover {
+  opacity: 0.8;
 }
 </style>
