@@ -184,6 +184,7 @@ onMounted(() => {
   lightFrontInit()
   animate()
   listeners(true)
+  console.log(city)
 })
 
 onUnmounted(() => {

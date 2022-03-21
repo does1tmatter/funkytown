@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.1.2",
-    "gsap": "^3.9.1",
     "three": "^0.138.3",
-    "vue": "^3.2.31"
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.2",
