@@ -124,7 +124,7 @@ const rendererInit = () => {
 }
 
 const animate = () => {
-  window.requestAnimationFrame(animate, 50)
+  window.requestAnimationFrame(animate)
   city.rotation.y = (x.value * speedMultiplier) + 0.45
   city.rotation.x = (y.value * speedMultiplier) + 0.45
   renderer.value.render(scene, camera)
