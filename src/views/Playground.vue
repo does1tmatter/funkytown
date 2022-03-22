@@ -146,7 +146,6 @@ onUnmounted(() => {
   <div>
     <canvas ref="canvasEl"></canvas>
     <div class="parallax" ref="parallaxCont">
-      veikia: scroll to zoom / model spin
     </div>
   </div>
 </template>
