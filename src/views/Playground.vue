@@ -87,7 +87,7 @@ const scrollCallback = (e) => {
 const loadModel = () => {
   const loader = new FBXLoader()
   // loader.setPath('./src/assets/models/')
-  loader.load('./Ch34_nonPBR.fbx', (obj) => {
+  loader.load('./ Ch34_nonPBR.fbx', (obj) => {
     model = obj
     model.scale.setScalar(0.1)
     model.traverse(c => {
