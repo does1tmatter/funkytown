@@ -18,6 +18,7 @@ const camera = new THREE.PerspectiveCamera(20, width.value / height.value, 1, 10
 const lightFront = new THREE.SpotLight(0xFFFFFF, 20, 10)
 const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1)
 const speedMultiplier = 0.0001
+const animMixer = []
 
 let model
 
@@ -86,24 +87,39 @@ const scrollCallback = (e) => {
 
 const loadModel = () => {
   const loader = new FBXLoader()
-  // loader.setPath('./src/assets/models/')
   loader.load('./Ch34_nonPBR.fbx', (obj) => {
     model = obj
     model.scale.setScalar(0.1)
     model.traverse(c => {
       c.castShadow = true
     })
-    scene.add(model)
     console.log('Model loaded')
-    renderer.value.render(scene, camera)
-    console.log(model)
+    const animation = new FBXLoader()
+    animation.load('./walk.fbx', (a) => {
+      const m = new THREE.AnimationMixer(model)
+      animMixer.push(m)
+      const idle = m.clipAction(a.animations[0])
+      idle.play()
+      console.log('Animation loaded')
+      console.log(m)
+    })
+    scene.add(model)
   })
 }
 
-const animate = () => {
+const prevFrame = ref(null)
+const time = new THREE.Clock
+
+const animate = (t) => {
   window.requestAnimationFrame(animate)
+  if (!prevFrame.value) {
+    prevFrame.value = t
+  }
   if (model) {
     model.rotation.y = tilt.value * 6
+  }
+  if (animMixer.length > 0) {
+    animMixer[0].update(time.getDelta())
   }
   camera.position.z = wheel.value
   renderer.value.render(scene, camera)
@@ -118,6 +134,7 @@ onMounted(() => {
   animate()
   console.log(scene)
   listeners(true)
+  console.log(time.getDelta())
 })
 
 onUnmounted(() => {
