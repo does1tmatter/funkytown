@@ -85,7 +85,10 @@ const scrollCallback = (e) => {
   }
 }
 
+const loading = ref(false)
+
 const loadModel = () => {
+  loading.value = true
   const loader = new FBXLoader()
   loader.load('./Ch34_nonPBR.fbx', (obj) => {
     model = obj
@@ -104,6 +107,7 @@ const loadModel = () => {
       console.log(m)
     })
     scene.add(model)
+    loading.value = false
   })
 }
 
@@ -146,6 +150,7 @@ onUnmounted(() => {
   <div>
     <canvas ref="canvasEl"></canvas>
     <div class="parallax" ref="parallaxCont">
+      {{ loading ? 'Loading' : '' }}
     </div>
   </div>
 </template>
@@ -163,5 +168,6 @@ canvas {
   left: 0;
   min-width: 100vw;
   min-height: 100vh;
+  text-align: center;
 }
 </style>
