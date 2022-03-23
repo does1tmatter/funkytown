@@ -104,7 +104,6 @@ const loadModel = () => {
       const idle = m.clipAction(a.animations[0])
       idle.play()
       console.log('Animation loaded')
-      console.log(m)
     })
     scene.add(model)
     loading.value = false
@@ -136,9 +135,7 @@ onMounted(() => {
   loadModel()
   rendererInit()
   animate()
-  console.log(scene)
   listeners(true)
-  console.log(time.getDelta())
 })
 
 onUnmounted(() => {
